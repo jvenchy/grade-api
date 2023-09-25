@@ -49,7 +49,6 @@ public class MongoGradeDB implements GradeDB {
     }
 
 
-
     @Override
     public Grade logGrade(String course, int grade) throws JSONException {
         OkHttpClient client = new OkHttpClient().newBuilder()
@@ -76,8 +75,7 @@ public class MongoGradeDB implements GradeDB {
             } else {
                 throw new RuntimeException(responseBody.getString("message"));
             }
-        }
-        catch (IOException | JSONException e) {
+        } catch (IOException | JSONException e) {
             throw new RuntimeException(e);
         }
     }
@@ -117,8 +115,7 @@ public class MongoGradeDB implements GradeDB {
             } else {
                 throw new RuntimeException(responseBody.getString("message"));
             }
-        }
-        catch (IOException | JSONException e) {
+        } catch (IOException | JSONException e) {
             throw new RuntimeException(e);
         }
     }
@@ -149,8 +146,7 @@ public class MongoGradeDB implements GradeDB {
             } else {
                 throw new RuntimeException(responseBody.getString("message"));
             }
-        }
-        catch (IOException | JSONException e) {
+        } catch (IOException | JSONException e) {
             throw new RuntimeException(e);
         }
     }
@@ -179,8 +175,7 @@ public class MongoGradeDB implements GradeDB {
             } else {
                 throw new RuntimeException(responseBody.getString("message"));
             }
-        }
-        catch (IOException | JSONException e) {
+        } catch (IOException | JSONException e) {
             throw new RuntimeException(e);
         }
     }
@@ -190,6 +185,17 @@ public class MongoGradeDB implements GradeDB {
     //       Hint: Read apiDocuments/getMyTeam.md and refer to the above
     //             methods to help you write this code (copy-and-paste + edit as needed).
     public Team getMyTeam() {
-        return null;
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        MediaType mediaType = MediaType.parse("application/json");
+        JSONObject requestBody = new JSONObject();
+        RequestBody body = RequestBody.create(mediaType, requestBody.toString());
+        Request request = new Request.Builder()
+                .url("https://grade-logging-api.chenpan.ca/team")
+                .method("GET", body)
+                .addHeader("Authorization", API_TOKEN)
+                .addHeader("Content-Type", "application/json")
+                .build();
+
     }
 }
